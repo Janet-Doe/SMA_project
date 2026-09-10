@@ -1,2 +1,2 @@
-# SMA_project
+# SMA project
 Projet scolaire de Simulation Multi-Agents.
