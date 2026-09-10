@@ -1,32 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <model version="NetLogo 7.0.4" snapToGrid="true">
   <code><![CDATA[breed [patrouilleurs patrouilleur]
+patrouilleurs-own [id]
+patches-own [oisiveté]
 
 to setup
   clear-all               ;; clear all patches and turtles
-  set-default-shape patrouilleurs "airplane"  ;; shape is defined in Turtle Shapes Editor
+  setup-patches
+  set-default-shape patrouilleurs "airplane"
   setup-patrouilleurs
   reset-ticks
 end
 
 to setup-patrouilleurs
   create-patrouilleurs nbPatrouilleurs 
-  [ setxy 0 0             ;; deboggage visuel : random-xcor random-ycor 
-  set label who]
+  [ setxy 0 0             ;; emplacement initial à (0, 0) 
+    set id who            ;; définit les ids des patrouilleurs comme leur ids (who) de tortues
+    set label id          ;; affiche les ids
+    set heading 0         ;; oriente les patrouilleurs dans la même direction
+  ]
+end
+
+to setup-patches
+  ask patches[
+    set oisiveté 0
+    set plabel oisiveté
+  ]
 end
 
 to step
-  if ticks > maxSteps [stop]
-  ask patrouilleurs [step-patrouilleur]
+  if ticks > maxSteps [stop] ;; arrêt si maxSteps atteint
+  ask patrouilleurs [        ;; demande à tous les patrouilleurs
+    step-patrouilleur        ;; d'effectuer leur comportement individuel
+  ]
+  ask patches [
+    step-patch
+  ]
+  tick
 end
 
 to step-patrouilleur
+  set heading one-of [0 90 180 270] ;; orienter aléatoirement
+  fd 1                              ;; avancer de 1 patch
+end
+
+to step-patch
+  ifelse (count turtles-here > 0) [
+    set oisiveté 0
+  ][ set oisiveté (oisiveté + 1) ]
+  set plabel oisiveté
 end
   ]]></code>
   <widgets>
-    <view x="285" wrappingAllowedX="false" y="25" frameRate="30.0" minPycor="-9" height="384" showTickCounter="true" patchSize="20.0" fontSize="10" wrappingAllowedY="false" width="384" tickCounterLabel="ticks" maxPycor="9" updateMode="0" maxPxcor="9" minPxcor="-9"></view>
-    <slider x="25" step="1" y="80" max="4000" width="250" display="maxSteps" height="50" min="3000" direction="Horizontal" default="3716.0" variable="maxSteps"></slider>
-    <chooser x="25" y="140" height="60" variable="nbPatrouilleurs" current="2" width="250" display="nbPatrouilleurs">
+    <view x="285" wrappingAllowedX="false" y="25" frameRate="30.0" minPycor="-9" height="384" showTickCounter="true" patchSize="20.0" fontSize="15" wrappingAllowedY="false" width="384" tickCounterLabel="ticks" maxPycor="9" updateMode="0" maxPxcor="9" minPxcor="-9"></view>
+    <slider x="25" step="1" y="80" max="4000" width="250" display="maxSteps" height="50" min="3000" direction="Horizontal" default="3000.0" variable="maxSteps"></slider>
+    <chooser x="25" y="140" height="60" variable="nbPatrouilleurs" current="6" width="250" display="nbPatrouilleurs">
       <choice type="double" value="1.0"></choice>
       <choice type="double" value="2.0"></choice>
       <choice type="double" value="4.0"></choice>
