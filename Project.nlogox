@@ -2,7 +2,7 @@
 <model version="NetLogo 7.0.4" snapToGrid="true">
   <code><![CDATA[breed [patrouilleurs patrouilleur]
 patrouilleurs-own [id]
-patches-own [oisiveté]
+patches-own [oisiveté gain coût]
 globals [avgIdleT maxIdleT maxMaxIdle]
 
 
@@ -12,6 +12,20 @@ to setup
   set-default-shape patrouilleurs "airplane"
   setup-patrouilleurs
   reset-ticks
+end
+
+to reinitialiser-utilite
+  ask patches [
+    set gain 0
+    set coût 0
+  ]
+end
+
+to calculer-utilité
+  ask patches with [true] [
+    set gain oisiveté
+    set coût (abs (pxcor - [xcor] of myself) + abs (pycor - [ycor] of myself))
+  ]
 end
 
 to setup-patrouilleurs
@@ -34,25 +48,74 @@ to setup-patches
   
 end
 
+to comportement-reactif
+  ifelse strategie-aleatoire [
+    set heading one-of [0 90 180 270] ;;random
+    fd 1                              
+  ] [
+    let cible max-one-of neighbors4 [oisiveté] 
+    face cible
+    move-to cible
+  ]
+end
+
+to comportement-cognitif
+  ;; Calculer l'utilité des emplacements
+  calculer-utilité
+  
+  ;; Trouver la tuile avec la meilleur utilité
+  let cible max-one-of patches [gain - coût]
+  
+  ;; Trouver le chemin le plus court vers la cible:
+  ;; liste des tuiles de la tuile suivante jusqu'à la cible
+  let chemin (bfs-to cible)
+  
+  ;; Se déplacer vers la première tuile du chemin
+  ;; (chemin vide si le patrouilleur est déjà sur la cible)
+  if not empty? chemin [
+    move-to first chemin
+  ]
+  
+  reinitialiser-oisivete-courante
+end
+
+to reinitialiser-oisivete-courante
+  ask patch-here [
+    set oisiveté 0
+    set plabel oisiveté
+  ]
+end
+
+to-report bfs-to [cible]
+  if patch-here = cible [ report [] ] 
+  let next-step min-one-of neighbors4 [distance cible]
+  report (list next-step)
+end
+
+
 to step
   if ticks > maxSteps [stop] ;; arrêt si maxSteps atteint
-  ask patrouilleurs [     ;; demande à tous les patrouilleurs
-    step-patrouilleur     ;; d'effectuer leur comportement individuel
+  ifelse cognitif [
+    ;; shuffle tire un ordre de parole aléatoire à chaque pas
+    foreach shuffle sort patrouilleurs [
+      patrouilleurCourant ->
+      reinitialiser-utilite
+      ask patrouilleurCourant [comportement-cognitif]
+    ]
+  ][
+    ask patrouilleurs [comportement-reactif]
   ]
-  ask patches [           ;; demande à tous les patchs
-    step-patch            ;; d'effectuer leur comportement individuel
+
+  ask patches [           
+    step-patch            
   ]
-  set avgIdleT (mean [oisiveté] of patches) ;; màj la moyenne d'oisiveté sur ce tick
-  set maxIdleT (max [oisiveté] of patches)  ;; màj le maximum d'oisiveté sur ce tick
-  if (maxIdleT > maxMaxIdle) [              ;; si besoin...
-    set maxMaxIdle maxIdleT]                ;; màj le maximum d'oisiveté sur la durée de la simulation
+  set avgIdleT (mean [oisiveté] of patches) 
+  set maxIdleT (max [oisiveté] of patches)  
+  if (maxIdleT > maxMaxIdle) [              
+    set maxMaxIdle maxIdleT]                
   tick
 end
 
-to step-patrouilleur
-  set heading one-of [0 90 180 270] ;; orienter aléatoirement
-  fd 1                              ;; avancer de 1 patch
-end
 
 to step-patch
   ifelse (count turtles-here > 0) [ ;; si tortue sur la case
@@ -64,7 +127,7 @@ end
   <widgets>
     <view x="285" wrappingAllowedX="false" y="25" frameRate="30.0" minPycor="-9" height="384" showTickCounter="true" patchSize="20.0" fontSize="15" wrappingAllowedY="false" width="384" tickCounterLabel="ticks" maxPycor="9" updateMode="0" maxPxcor="9" minPxcor="-9"></view>
     <slider x="25" step="1" y="80" max="4000" width="250" display="maxSteps" height="50" min="3000" direction="Horizontal" default="3000.0" variable="maxSteps"></slider>
-    <chooser x="25" y="140" height="60" variable="nbPatrouilleurs" current="4" width="250" display="nbPatrouilleurs">
+    <chooser x="25" y="140" height="60" variable="nbPatrouilleurs" current="6" width="250" display="nbPatrouilleurs">
       <choice type="double" value="1.0"></choice>
       <choice type="double" value="2.0"></choice>
       <choice type="double" value="4.0"></choice>
@@ -94,6 +157,8 @@ end
         <update>plot (nbPatrouilleurs / (count patches)) * maxMaxIdle</update>
       </pen>
     </plot>
+    <switch x="25" y="205" height="40" on="true" variable="cognitif" width="75" display="cognitif"></switch>
+    <switch x="110" y="205" height="40" on="true" variable="strategie-aleatoire" width="130" display="strategie-aleatoire"></switch>
   </widgets>
   <info>## WHAT IS IT?
 
