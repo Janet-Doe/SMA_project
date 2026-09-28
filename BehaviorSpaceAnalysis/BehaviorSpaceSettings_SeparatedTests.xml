@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<experiments>
+  <experiment name="experiment 1" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="1"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+  <experiment name="experiment 2" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="2"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+  <experiment name="experiment 4" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="4"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+  <experiment name="experiment 8" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="8"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+  <experiment name="experiment 16" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="16"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+  <experiment name="experiment 32" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="32"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+  <experiment name="experiment 64" repetitions="10" sequentialRunOrder="true" version="NetLogo 7.0.4" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>step</go>
+    <metrics>
+      <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="maxSteps">
+        <value value="3000"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="nbPatrouilleurs">
+        <value value="64"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="strategie-aleatoire">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="cognitif">
+        <value value="true"></value>
+        <value value="false"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+</experiments>
