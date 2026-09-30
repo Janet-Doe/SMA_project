@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <model version="NetLogo 7.0.4" snapToGrid="true">
-  <code><![CDATA[breed [patrouilleurs patrouilleur]
+  <code><![CDATA[;; 
+;; 
+
+breed [patrouilleurs patrouilleur]
 patrouilleurs-own [id]
 patches-own [oisiveté gain coût]
 globals [avgIdleT maxIdleT maxMaxIdle]
@@ -126,7 +129,7 @@ end
   ]]></code>
   <widgets>
     <view x="285" wrappingAllowedX="false" y="25" frameRate="30.0" minPycor="-9" height="384" showTickCounter="true" patchSize="20.0" fontSize="15" wrappingAllowedY="false" width="384" tickCounterLabel="ticks" maxPycor="9" updateMode="0" maxPxcor="9" minPxcor="-9"></view>
-    <slider x="25" step="1" y="80" max="4000" width="250" display="maxSteps" height="50" min="3000" direction="Horizontal" default="3000.0" variable="maxSteps"></slider>
+    <slider x="25" step="1" y="80" max="4000" width="250" display="maxSteps" height="50" min="3000" direction="Horizontal" default="4000.0" variable="maxSteps"></slider>
     <chooser x="25" y="140" height="60" variable="nbPatrouilleurs" current="6" width="250" display="nbPatrouilleurs">
       <choice type="double" value="1.0"></choice>
       <choice type="double" value="2.0"></choice>
@@ -160,42 +163,60 @@ end
     <switch x="25" y="205" height="40" on="true" variable="cognitif" width="75" display="cognitif"></switch>
     <switch x="110" y="205" height="40" on="true" variable="strategie-aleatoire" width="130" display="strategie-aleatoire"></switch>
   </widgets>
-  <info>## WHAT IS IT?
+  <info><![CDATA[## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+Ce modèle sert à analyser l'efficacité de plusieurs comportements dans le cadre d'un problème de patrouille : chaque secteur doit être visité régulièrement, et ne doit pas rester trop longtemps sans surveillance. 
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+Les tuiles (patches) du modèle correspondent aux différents secteurs à visiter. Ils possèdent chacun un facteur d'oisiveté, qui compte le nombre de pas depuis la dernière visite d'un patrouilleur. Par souci de modélisation, la carte n'est pas contine horizontalement et verticalement - cf. les tuiles se situant en haut, respectivement dans les angles gauche et droite de la carte, ne sont pas considérés côte-à-côte. 
+
+Les patrouilleurs (turtles) peuvent se déplacer à chaque pas sur les tuiles adjacentes à leur position actuelle : elles ont ainsi les options "Haut", "Droite", "Bas", et "Gauche".Ce choix peut s'effectuer selon trois comportements différents : 
+- (A) : le patrouilleur n'a pas d'information sur son environnement, et le choix est réactif et considéré aléatoire;
+- (B) : le patrouilleur a une visibilité limitée sur son environnement, et fera son choix en fonction de l'oisiveté de ses cases adjacentes. Le choix est dans ce cas réactif et heuristique;
+- (C) : le patrouilleur a une perception globale de l'environnement qui lui permet de se diriger vers la tuile de plus grande oisiveté par le plus court chemin. Son choix est alors cognitif. 
+
+A l'état initial de la simulation, les tuiles possèdent une oisiveté valant 0, et les patrouilleurs sont tous centralisés au milieu de la carte.
+
+Sur le côté droit de l'écran, des diagrammes iillustrent l'oisiveté maximale atteinte lors de la simulation, ainsi que la valuer de l'oisiveté maximale normalisée par le nombre de patrouilleurs et de tuiles. 
+
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+Vous pouvez modifier les paramètres suivants : 
+- le nombre de pas maximal de la simulation. Cette dernière n'ayant pas de cas d'arrêt, le système la limite entre 3000 et 4000 pas.
+- le nombre de patrouilleurs : 1, 2, 4, 8, 16, 32 ou 64.
+- le comportement des patrouilleurs : celui-ci est défini via deux boutons de type toggle. Le premier défini si le comportement est cognitif (C) ou réactif (A, B). Le second est pris en compte dans le cas réactif, et permis de définir si le comportement est aléatoire (A) ou heuristique (B).
 
-## THINGS TO NOTICE
+Une fois les paramètres sélectionnées, il vous suffira de cliquer sur le bouton "Initialisation". Vous pourrez ensuite lancer la simulation en continu via le bouton "Exécution", ou l'effectuer pas par pas en utilisant le bouton "Exécution".
 
-(suggested things for the user to notice while running the model)
 
 ## THINGS TO TRY
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+Pistes de tests :
+- comparaison de l'efficacité en fonction du comportement
+- comparaisons du comportement des patrouilleurs en fonction de leur nombre
 
-## EXTENDING THE MODEL
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+Des tests comparatifs des comportements ont été réalisés à l'aide de l'outil BehaviorSpace (onglet outil de l'application). Ils sont accessibles dans ce projet par souci de reproducibilité. Ci-dessous 
 
-## NETLOGO FEATURES
+![Diagramme représentants les moyennes d'oisiveté normalisées, par comportement et par nombre de patrouilleurs](https://github.com/Janet-Doe/SMA_project/blob/main/BehaviorSpaceAnalysis/sch%C3%A9ma.png)
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+> S'il ne s'affiche pas correctement, ce diagramme ainsi que les données utilisées pour le produire sont accessibles sur le lien GitHub du modèle, partagé ci-dessous.
 
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
+Ce diagramme est réalisé à partir des données récolletés par les expériences BehaviorSpace sauvegardée dans le projet. Les moyennes ont été calculées sur des échantillons de 10 tests par comportement et par nombre de patrouilleurs. Ainsi, pour chaque expérience réalisée pour un nombre de patrouilleurs donné, les tests du comportement cognitifs n°11 à 20 ont ainsi été ignorés par souci de normalisation quantitatif avec les données des comportements réactifs.
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
-</info>
+Ce projet a été réalisé par :
+- Blumetti Davi
+- Grenier Lilas
+
+Le sujet du projet est accessible sur le [site Moodle](https://moodle.univ-lyon1.fr/) sous le cours de [Systèmes Multi-Agent (morge)](https://moodle.univ-lyon1.fr/course/view.php?id=8662), d'identifiant 8662.
+
+
+Vous pouvez trouver le repo GitHub du modèle à [cette adresse](https://github.com/Janet-Doe/SMA_project). Il contient par ailleurs les données obtenues lors des tests avec BehaviorSpace, sous format CSV.
+]]></info>
   <turtleShapes>
     <shape name="default" rotatable="true" editableColorIndex="0">
       <polygon color="-1920102913" filled="true" marked="true">
@@ -1030,4 +1051,167 @@ end
     </shape>
   </linkShapes>
   <previewCommands>setup repeat 75 [ go ]</previewCommands>
+  <experiments>
+    <experiment name="experiment 1" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="experiment 2" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="2"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="experiment 4" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="experiment 8" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="experiment 16" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="16"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="experiment 32" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="32"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="experiment 64" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>step</go>
+      <metrics>
+        <metric>(nbPatrouilleurs / (count patches)) * maxMaxIdle</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="maxSteps">
+          <value value="3000"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="nbPatrouilleurs">
+          <value value="64"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="cognitif">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="strategie-aleatoire">
+          <value value="true"></value>
+          <value value="false"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+  </experiments>
 </model>
