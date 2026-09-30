@@ -13,11 +13,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="1"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
@@ -36,11 +36,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="2"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
@@ -59,11 +59,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="4"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
@@ -82,11 +82,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="8"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
@@ -105,11 +105,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="16"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
@@ -128,11 +128,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="32"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
@@ -151,11 +151,11 @@
       <enumeratedValueSet variable="nbPatrouilleurs">
         <value value="64"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="strategie-aleatoire">
+      <enumeratedValueSet variable="cognitif">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
-      <enumeratedValueSet variable="cognitif">
+      <enumeratedValueSet variable="strategie-aleatoire">
         <value value="true"></value>
         <value value="false"></value>
       </enumeratedValueSet>
